@@ -16,7 +16,6 @@ class ToDo
      */
     private $id;
 
-
     /**
      * @ORM\Column(type="text", length=100)
      */
