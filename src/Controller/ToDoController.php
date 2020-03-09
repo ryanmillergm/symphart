@@ -14,7 +14,9 @@
 
     public function index() {
 
-      return $this->render('todos/index.html.twig');
+      $todo_list = ['to-do one', 'to-do two', 'to-do three'];
+
+      return $this->render('todos/index.html.twig', array('todo_list' => $todo_list));
     }
   }
 ?>
