@@ -1,7 +1,27 @@
 {% extends 'base.html.twig' %}
-
 {% block title %}To-Do List{% endblock %}
 
 {% block body %}
-  <h1>To-Do List</h1>
+  {% if todo_list %}
+    <table class="">
+      <thead>
+        <tr>
+          <th>To-Do List</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for todo in todo_list %}
+        <tr>
+          <td>{{ todo }}</td>
+          <td>
+            <a href="/todos/1" class="">Show</a>
+          </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>No To-Do List. You need to set goals in life. JK ;)</p>
+  {% endif %}
 {% endblock %}
