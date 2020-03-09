@@ -13,9 +13,9 @@
       <tbody>
       {% for todo in todo_list %}
         <tr>
-          <td>{{ todo }}</td>
+          <td>{{ todo.title }}</td>
           <td>
-            <a href="/todos/1" class="">Show</a>
+            <a href="/todos/{{ todo.id }}" class="">Show</a>
           </td>
         </tr>
       {% endfor %}
