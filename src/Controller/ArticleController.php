@@ -22,6 +22,16 @@
       return $this->render('articles/index.html.twig', array('articles' => $articles));
     }
 
+    /**
+     * @Route("/article/{id}", name="article_show")
+     * @Method({"GET"})
+     */
+     public function show($id) {
+       $article = $this->getDoctrine()->getRepository(Article::class)->find($id);
+
+       return $this->render('articles/show.html.twig', array('article' => $article ));
+     }
+
     // /**
     // *@Route("/article/save")
     // */
