@@ -15,7 +15,7 @@
 
   class ToDoController extends AbstractController {
     /**
-     * @Route("/todos")
+     * @Route("/todo", name="todo_list")
      * @Method({"GET"})
      */
 
@@ -27,7 +27,41 @@
     }
 
     /**
-     * @Route("/todos/{id}", name="todo_show")
+    * @Route("/todo/new", name="new_todo")
+    * @Method({"GET", "POST"})
+    */
+    public function new(Request $request) {
+      $todo = new ToDo();
+
+      $form = $this->createFormBuilder($todo)
+      ->add('title', TextType::class, array('attr' => array('class' => 'form-control')))
+      ->add('body', TextareaType::class, array (
+        'attr' => array('class' => 'form-control')
+      ))
+      ->add('save', SubmitType::class, array(
+        'label' => 'Create',
+        'attr' => array('class' => 'btn btn-primary mt-3')
+      ))
+      ->getForm();
+
+      $form->handleRequest($request);
+
+      if($form->isSubmitted() && $form->isValid()) {
+        $todo = $form->getData();
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($todo);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('todo_list');
+      }
+
+      return $this->render('todos/new.html.twig', array('form' => $form->createView()
+    ));
+    }
+
+    /**
+     * @Route("/todo/{id}", name="todo_show")
      * @Method({"GET"})
      */
     public function show($id) {
@@ -37,7 +71,7 @@
     }
 
     /**
-    *@Route("/todos/save")
+    *@Route("/todo/save")
     */
     // public function save(){
     //   $entityManager = $this->getDoctrine()->getManager();
