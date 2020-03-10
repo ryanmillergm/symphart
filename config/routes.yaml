@@ -3,5 +3,5 @@
 #    controller: App\Controller\ArticleController::index
 
 # index:
-#    path: /todos/
+#    path: /todo/
 #    controller: App\Controller\ToDoController::index
